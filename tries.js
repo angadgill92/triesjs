@@ -2,7 +2,6 @@
  [Fact] - The word `trie` is an **infix** of the word "re|trie|val"
 */
 
-
 /* Utility Functions */
 const isEmpty = str => str === ''
 const firstCharacterOf = word => word[0]
@@ -12,9 +11,9 @@ const cutLeftMostCharacter = word => word.slice(1)
 // Dictionary is a tree where each vertex is an alphabet
 
 const initialize = (vertex) => {  
-  vertex.words    = 0      // integer
+  vertex.words = 0      // integer
   vertex.prefixes = 0   // integer
-  vertex.edges    = {}     // empty object
+  vertex.edges = {}     // empty object
 }
 
 // Object String -> Object
@@ -45,7 +44,7 @@ const countPrefixes = (vertex, prefix) => {
   if (isEmpty(prefix)) return vertex.prefixes
   if (notExists(prefix, vertex.edges)) return 0
   let newWord = cutLeftMostCharacter(prefix)
-  return countPrefixes(vertex.edges[k], prefix)
+  return countPrefixes(vertex.edges[k], newWord)
 }
 // String -> Number
 /* Count the number of words in the dictionary that match the given String exactly */
@@ -55,7 +54,7 @@ const countWords = (vertex, word) => {
   if (isEmpty(word)) return vertex.words
   if (notExists(word, vertex.edges)) return 0
   let newWord = cutLeftMostCharacter(word)
-  return countWords(vertex.edges[k], word)
+  return countWords(vertex.edges[k], newWord)
 }
 
 module.exports = {
